@@ -5,14 +5,15 @@ export const login = (creds) => async (dispatch) => {
 
     // dispatch({ type: LOGIN_GET_LOADING });
     try {
-        let response = await axios.post("https://cloneofeverhour.herokuapp.com/users/login", creds)
+        let response = await axios.post("http://localhost:8081/users/login", creds)
+        console.log(response.data,'my response data')
         dispatch({ type: LOGIN_GET_SUCCESS, payload: response.data });
         return response.data;
         
     }
     catch (e) {
         dispatch({ type: LOGIN_GET_ERROR })
-        
+        console.log(e,'my error')        
    
     }
 
@@ -21,7 +22,7 @@ export const login = (creds) => async (dispatch) => {
 }
 export const update = (id, newcred) => async (dispatch) => {
     try {
-        let res= await axios.patch(`https://cloneofeverhour.herokuapp.com/users/${id}`,newcred)
+        let res= await axios.patch(`http://localhost:80810/users/${id}`,newcred)
         dispatch({ type: UPDATE_GET_SUCCESS, payload: res.data });
         
     }

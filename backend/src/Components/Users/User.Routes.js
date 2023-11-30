@@ -60,13 +60,15 @@ app.post("/login", async (req, res) => {
     let { email, password } = req.body;
     let user = await User.findOne({ email, password });
 
+
     if (!user) {
       return res.status(401).send("Authentication failed");
     }
 
     res.send({
       token: `${user.id}:${user.email}:${user.password}:${user.role}`,
-      name: createdUser.username
+      name: user.username,
+      id:user.id
     });
   } catch (e) {
     res.status(500).send(e.message);
@@ -96,7 +98,7 @@ app.post("/signup", async (req, res) => {
 
 //token
 // userid
-//http://localhost:8080/users/id
+//http://localhost:80810/users/id
 
 app.patch("/:id", authMiddleware, async (req, res) => {
   try {

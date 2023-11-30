@@ -25,6 +25,7 @@ import { login } from "../Store/auth.action.type";
 export default function Login() {
   let token = useSelector(store => store.auth.token);
   let auth = useSelector(store => store.auth);
+  console.log(auth,'my auth')
   // const { SigninwithGoogle } = useAuth();
 
   const toast = useToast();

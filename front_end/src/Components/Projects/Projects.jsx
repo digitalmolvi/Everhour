@@ -39,14 +39,14 @@ import { store } from "../../Store/store";
 
 const getproject = async (id) => {
   let res = await axios.get(
-    `https://cloneofeverhour.herokuapp.com/projects/${id}`
+    `http://localhost:8081/projects/${id}`
   );
   return res;
 };
 
 const toggle = async (id, isActive) => {
   let res = await axios.patch(
-    `https://cloneofeverhour.herokuapp.com/projects/${id}`,
+    `http://localhost:8081/projects/${id}`,
     {
       isActive,
     }
@@ -55,7 +55,8 @@ const toggle = async (id, isActive) => {
 };
 
 const Projects = () => {
-  let id = useSelector((store) => store.auth.id);
+  let id = useSelector((store) => store.auth.id) ?? localStorage.getItem('id')
+  console.log(localStorage.getItem('id'))
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
@@ -69,7 +70,7 @@ const Projects = () => {
   // const [searchedData,setSearchedData]=useState([])
 
   // const search=(query)=>{
-  //   axios.get(`https://cloneofeverhour.herokuapp.com/projects/63356e456e29a1d70aab7c3b?q=${query}`)
+  //   axios.get(`http://localhost:8081/projects/63356e456e29a1d70aab7c3b?q=${query}`)
   //     .then((res)=>{
   //       console.log(res)
   //       setSearchedData(res)
@@ -103,7 +104,7 @@ const Projects = () => {
 
   const removePro = async (iddd) => {
     const res = await axios.delete(
-      `https://cloneofeverhour.herokuapp.com/projects/${iddd}`
+      `http://localhost:8081/projects/${iddd}`
     );
 
     if (res.status === 200) {
@@ -119,26 +120,32 @@ const Projects = () => {
   };
 
   const addPro = async (id, project) => {
-    console.log(id);
+    console.log(id,'id in addpro');
 
     const res = await axios.post(
-      `https://cloneofeverhour.herokuapp.com/projects/${id}`,
+      `http://localhost:8081/projects/${id}`,
       project
     );
 
     if (res.status === 200) {
       projectdata(id);
     }
+    setTitle("")
+    onClose()
+    
   };
 
   useEffect(() => {
     projectdata(id);
-  }, []);
+  }, [id]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     addPro(id, { title: title });
   };
+
+  console.log(id,'id in this project');
+
 
   return (
     <>

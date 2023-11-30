@@ -1,4 +1,4 @@
-const PORT = process.env.PORT || 8080
+const PORT = process.env.PORT || 8081
 const express = require("express")
 const cors = require("cors")
 const connect = require("./Components/Config/db");
@@ -22,5 +22,5 @@ app.get("/", (req, res) => {
 
 app.listen(PORT, async() => {
     await connect();
-    console.log("server started at http://localhost:8080");
+    console.log(`server started at http://localhost:${PORT}`);
 })

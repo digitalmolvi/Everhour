@@ -4,7 +4,7 @@ import { SIGNUP_ERROR, SIGNUP_LOADING, SIGNUP_SUCCESS, SIGNUP_UPDATE } from "./s
 export const signup = (creds) => async (dispatch) => {
     dispatch({ type: SIGNUP_LOADING })
     try {
-        let res = await axios.post("https://cloneofeverhour.herokuapp.com/users/signup", creds)
+        let res = await axios.post("http://localhost:8081/users/signup", creds)
         dispatch({ type: SIGNUP_SUCCESS, payload: res.data });
         console.log(res.data)
          return res.data

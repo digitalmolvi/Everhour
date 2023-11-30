@@ -26,6 +26,7 @@ import {
       }
       case LOGIN_GET_SUCCESS: {
         if (payload.token) {
+          console.log(payload,'payload in login')
           localStorage.setItem("token", payload.token);
           localStorage.setItem("name", payload.name);
           localStorage.setItem("id", payload.id);
@@ -43,7 +44,7 @@ import {
       }
       case UPDATE_GET_SUCCESS: {
         if (payload.token) {
-          // localStorage.setItem("token", payload.token);
+          localStorage.setItem("token", payload.token);
           localStorage.setItem("name", payload.name);
         }
   
